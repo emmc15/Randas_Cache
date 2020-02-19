@@ -3,7 +3,7 @@ Cache Pandas Dataframe with Redis
 
 Randas cache creates the abiility to decorate functions or methods that return a pandas Dataframe and store that in a redis database
 
-'''python
+```python
 from Randas_Cache import Randas_Cache
 import redis
 r = redis.Redis(host='localhost', port=6379, db=0)
@@ -18,7 +18,7 @@ def test(key, num):
 
 
 test('key', 4)
-'''
+```
 
 When we run the function above, the first time it is ran, it will run the process. thereafter, if the function name and params are the same, the dataframe will be returned from redis rather than be generated again
 
