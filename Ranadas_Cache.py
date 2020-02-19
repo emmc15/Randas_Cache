@@ -30,7 +30,7 @@ class Randas_Cache:
         Returns:
             str()
         """
-        params = [self.leading_key]
+        params = [self.leading_key, func.__name__]
         if len(args) > 0:
             args_given = [str(i) for i in args]
             args_given = ':'.join(args_given)
@@ -61,7 +61,6 @@ class Randas_Cache:
             else:
                 # Runs the function that was decorated
                 value = func(*args, **kwargs)
-                print('running process no key found')
                 # if function is dataframe, insert into database
                 if isinstance(value, pd.DataFrame):
                     self._serialize(key, value)
@@ -70,7 +69,6 @@ class Randas_Cache:
         return wrapper_df_decorator
 
     def _deserialize(self, key):
-        print(f'returning value(s) from {key}')
         pull_value = self.cache_container.get(key)
         return self.context.deserialize(pull_value)
 
